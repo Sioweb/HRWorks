@@ -19,7 +19,7 @@ HRWORKS_SECRET_KEY="your_secret_key"
 
 Make sure your admin gave you the correct permissions for the actions you want to use.
 
-After installation yout can create a PHP-File in `/web` directory. Its recommendet to use a subdirectory, so users cannot access sensitive directories like `/vendor`, or `/var/logs` if you use it.
+After installation you can create a PHP-File in `/web` directory. Its recommendet to use a subdirectory, so users cannot access sensitive directories like `/vendor`, or `/var/logs` if you use it.
 
 ```php
 <?php
