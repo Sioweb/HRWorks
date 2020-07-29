@@ -60,3 +60,5 @@ You can also create a [Postman](https://www.postman.com) import with this packag
 ```json
 {"type":"InvalidSignatureError","errorCode":403,"errorMessage":"The signature included in your request does not match the signature we calculated."}
 ```
+
+Keep in mind, that you have to update the date and the x-hrworks-date all 15 minutes.
