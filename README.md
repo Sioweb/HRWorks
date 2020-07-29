@@ -57,7 +57,7 @@ $Client->load('GetPresentPersonsOfOrganizationUnit', [
 
 ### setRootDir
 
-The client loads `.env` from root dir, which is by default `$_SERVER['DOCUMENT_ROOT'] . '/../`. If you install script in `/` instead of `/web`, you need to run something like `php $Client->setRootDir($_SERVER['DOCUMENT_ROOT']);`, befor u can.
+The client loads `.env` from root dir, which is by default `$_SERVER['DOCUMENT_ROOT'] . '/../`. If you install script in `/` instead of `/web`, you need to run something like `$Client->setRootDir($_SERVER['DOCUMENT_ROOT']);`, befor `$Client->init()`.
 
 `$_SERVER['DOCUMENT_ROOT'] . '/../'` could output for example: `/var/www/html/yourdomain/web/../`
 
