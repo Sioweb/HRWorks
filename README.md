@@ -43,7 +43,7 @@ foreach ($Organisations['organizationUnits'] as $Organisation) {
 
 ## Client
 
-### Load
+### Client::load(String $Target, Array Payload = NULL)
 
 Load requires minimum a target. For some actions like `GetPresentPersonsOfOrganizationUnit` you need to add payload as Array: 
 
@@ -55,7 +55,7 @@ $Client->load('GetPresentPersonsOfOrganizationUnit', [
 ])
 ```
 
-### setRootDir
+### Client::setRootDir(String $RootPath)
 
 The client loads `.env` from root dir, which is by default `$_SERVER['DOCUMENT_ROOT'] . '/../`. If you install script in `/` instead of `/web`, you need to run something like `$Client->setRootDir($_SERVER['DOCUMENT_ROOT']);`, befor `$Client->init()`.
 
