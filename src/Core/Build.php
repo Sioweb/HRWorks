@@ -21,10 +21,6 @@ class Build
         $this->debug = $debug;
 
         header('Access-Control-Allow-Origin: *');
-        if(!$this->debug) {
-            header('Content-Type: application/json');
-        }
-
         $dotenv = new Dotenv(true);
         $dotenv->load(rtrim($_SERVER['DOCUMENT_ROOT'], '/') . '/../.env');
 

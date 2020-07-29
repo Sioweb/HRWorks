@@ -23,17 +23,19 @@ After installation yout can create a PHP-File with following content. Please be 
 
 ```php
 <?php
-
+// index.php
 use Sioweb\Hrworks\Core\Client;
 
 include 'vendor/autoload.php';
 
+$Client = new Client();
 $Organisations = $Client->load('GetAllOrganizationUnits');
-foreach($Organisations['organizationUnits'] as $Organisation) {
-    echo '<h3>' . $Organisation['organizationUnitName'] . ' (' . $Organisation['organizationUnitNumber'] . ')</h3>';
-    echo '<pre>' . __METHOD__ . ":\n" . print_r($Client->load('GetPresentPersonsOfOrganizationUnit', [
+
+foreach ($Organisations['organizationUnits'] as $Organisation) {
+    echo '<h3>' . $Organisation['organizationUnitName'] . ' (Unit id: ' . $Organisation['organizationUnitNumber'] . ')</h3>';
+    echo '<pre>' . print_r($Client->load('GetPresentPersonsOfOrganizationUnit', [
         'organizationUnitNumber' => $Organisation['organizationUnitNumber']
-    ]), true) . "\n#################################\n\n" . '</pre>';
+    ]), true) . '</pre>';
 }
 ```
 
