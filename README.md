@@ -55,7 +55,11 @@ $Client->load('GetPresentPersonsOfOrganizationUnit', [
 
 ### setRootDir
 
-The client loads `.env` from root dir, which is by default `$_SERVER['DOCUMENT_ROOT'] . '/../`. If you install script in `/` instead of `/web` you neet to run something like `php $Client->setRootDir($_SERVER['DOCUMENT_ROOT']);`.
+The client loads `.env` from root dir, which is by default `$_SERVER['DOCUMENT_ROOT'] . '/../`. If you install script in `/` instead of `/web`, you need to run something like `php $Client->setRootDir($_SERVER['DOCUMENT_ROOT']);`.
+
+#### $_SERVER['DOCUMENT_ROOT'] . '/../
+
+Example output: `/var/www/html/yourdomain/web/../`
 
 ## Postman
 
