@@ -28,9 +28,6 @@ use Sioweb\Hrworks\Core\Client;
 
 include 'vendor/autoload.php';
 
-$Client = new Client();
-$GetAllActivePersons = $Client->load('GetAllActivePersons');
-
 $Organisations = $Client->load('GetAllOrganizationUnits');
 foreach($Organisations['organizationUnits'] as $Organisation) {
     echo '<h3>' . $Organisation['organizationUnitName'] . ' (' . $Organisation['organizationUnitNumber'] . ')</h3>';
@@ -38,4 +35,16 @@ foreach($Organisations['organizationUnits'] as $Organisation) {
         'organizationUnitNumber' => $Organisation['organizationUnitNumber']
     ]), true) . "\n#################################\n\n" . '</pre>';
 }
+```
+
+## Load
+
+Load requires minimum a target. For some actions like `GetPresentPersonsOfOrganizationUnit` you need to add payload as Array: 
+
+```php
+// Client::load(String $Target, Array Payload = NULL)
+
+$Client->load('GetPresentPersonsOfOrganizationUnit', [
+    'organizationUnitNumber' => 1
+])
 ```
