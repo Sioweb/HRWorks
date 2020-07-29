@@ -45,7 +45,7 @@ foreach ($Organisations['organizationUnits'] as $Organisation) {
 
 ### Client::load(String $Target, Array Payload = NULL)
 
-Load requires minimum a target. For some actions like `GetPresentPersonsOfOrganizationUnit` you need to add payload as Array: 
+Load requires minimum a target. For some actions like `GetPresentPersonsOfOrganizationUnit` you need to add payload as array: 
 
 ```php
 // Client::load(String $Target, Array Payload = NULL)
