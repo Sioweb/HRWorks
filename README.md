@@ -51,7 +51,7 @@ $Client->load('GetPresentPersonsOfOrganizationUnit', [
 
 ## Postman
 
-You can also create a Postman import with this package. You simply have to use Postman::load instead of Client::load. 
+You can also create a [Postman](https://www.postman.com) import with this package. You simply have to use Postman::load instead of Client::load. 
 
 **Attention:** Postman will not send correct signature for now. Maybe this will work in some future.
 
