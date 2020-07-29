@@ -96,8 +96,6 @@ class Build
             $this->currentDate = $dateTime->format('Ymd\THis\Z');
             $this->dayString = $dateTime->format('Ymd');
         }
-        $this->currentDate = '20200729T045131Z';
-        $this->dayString = '20200729';
     }
     
 
