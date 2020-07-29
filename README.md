@@ -29,6 +29,8 @@ use Sioweb\Hrworks\Core\Client;
 include '../vendor/autoload.php';
 
 $Client = new Client();
+// $Client->setRootDir('/var/www/folder');
+$Client->init();
 $Organisations = $Client->load('GetAllOrganizationUnits');
 
 foreach ($Organisations['organizationUnits'] as $Organisation) {
@@ -55,7 +57,7 @@ $Client->load('GetPresentPersonsOfOrganizationUnit', [
 
 ### setRootDir
 
-The client loads `.env` from root dir, which is by default `$_SERVER['DOCUMENT_ROOT'] . '/../`. If you install script in `/` instead of `/web`, you need to run something like `php $Client->setRootDir($_SERVER['DOCUMENT_ROOT']);`.
+The client loads `.env` from root dir, which is by default `$_SERVER['DOCUMENT_ROOT'] . '/../`. If you install script in `/` instead of `/web`, you need to run something like `php $Client->setRootDir($_SERVER['DOCUMENT_ROOT']);`, befor u can.
 
 #### $_SERVER['DOCUMENT_ROOT'] . '/../
 

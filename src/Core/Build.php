@@ -21,8 +21,11 @@ class Build
     public function __construct($debug = 0)
     {
         $this->debug = $debug;
-
         header('Access-Control-Allow-Origin: *');
+    }
+
+    public function init()
+    {
         $dotenv = new Dotenv(true);
         $dotenv->load($this->getRootDir() . '.env');
 
