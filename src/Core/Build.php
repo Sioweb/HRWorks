@@ -24,20 +24,20 @@ class Build
         $dotenv = new Dotenv(true);
         $dotenv->load(rtrim($_SERVER['DOCUMENT_ROOT'], '/') . '/../.env');
 
-        if($this->debug >= 2) {
+        if ($this->debug >= 2) {
             putenv("HRWORKS_ACCESS_KEY=kdVDiLrylwri8+oLffNi");
             putenv("HRWORKS_SECRET_KEY=BGWVXYEYrPJVzU9W9B1x2o2vov0SdihAv");
         }
 
-        if(getenv('HRWORKS_ENVIRONMENT') === false) {
+        if (getenv('HRWORKS_ENVIRONMENT') === false) {
             putenv("HRWORKS_ENVIRONMENT=production");
         }
 
-        if(getenv('HRWORKS_HMAC') === false) {
+        if (getenv('HRWORKS_HMAC') === false) {
             putenv("HRWORKS_HMAC=HRWORKS-HMAC-SHA256");
         }
 
-        if(getenv('HRWORKS_API_HOST') === false) {
+        if (getenv('HRWORKS_API_HOST') === false) {
             putenv("HRWORKS_API_HOST=api.hrworks.de");
         }
 
@@ -61,13 +61,13 @@ class Build
                 throw new Exception(curl_error($curl), curl_errno($curl));
             }
 
-            if($this->debug >= 1) {
+            if ($this->debug >= 1) {
                 echo '<h3>CURL-Info:</h3>';
-                echo '<pre>'. print_r(curl_getinfo($curl), true) . "\n#################################\n\n" . '</pre><br><hr><br>';
+                echo '<pre>' . print_r(curl_getinfo($curl), true) . "\n#################################\n\n" . '</pre><br><hr><br>';
             }
 
             curl_close($curl);
-            if($this->debug >= 2) {
+            if ($this->debug >= 2) {
                 die;
             }
             return json_decode($content, true);
@@ -84,8 +84,8 @@ class Build
     {
         $dateTime = new \DateTime();
         $dateTime->setTimeZone(new \DateTimeZone('UTC'));
-        
-        if($this->debug >= 2 ) {
+
+        if ($this->debug >= 2) {
             $this->currentDate = '20200409T093020Z';
             $this->dayString = '20200409';
         } else {
@@ -93,7 +93,6 @@ class Build
             $this->dayString = $dateTime->format('Ymd');
         }
     }
-    
 
     protected function header()
     {
@@ -107,9 +106,9 @@ class Build
             'x-hrworks-target:' . $this->target
         ]));
 
-        if($this->debug >= 1) {
+        if ($this->debug >= 1) {
             echo '<h3>Header:</h3>';
-                echo '<pre>' . print_r($header . "\n\n" . hash('SHA256', $this->payload), true) . "<br>\t===<br>3546fe6fceac608eec5313fe9842506e8720b6c203b8405cb420ac8df7bc0840</pre><br><hr><br>";
+            echo '<pre>' . print_r($header . "\n\n" . hash('SHA256', $this->payload), true) . "<br>\t===<br>3546fe6fceac608eec5313fe9842506e8720b6c203b8405cb420ac8df7bc0840</pre><br><hr><br>";
             /**
              * POST
              * /
@@ -120,7 +119,7 @@ class Build
              * x-hrworks-target:GetPresentPersonsOfOrganizationUnit
              * 
              * 3546fe6fceac608eec5313fe9842506e8720b6c203b8405cb420ac8df7bc0840
-             */ 
+             */
         }
 
         return $header;
@@ -137,7 +136,7 @@ class Build
             hash('SHA256', $this->header() . "\n\n" . hash('SHA256', $this->payload))
         ]);
 
-        if($this->debug >= 1) {
+        if ($this->debug >= 1) {
             echo '<h3>Signature:</h3>';
             echo '<pre>' . print_r($Request, true) . "<br>\t===<br>2daeec35f547252882ff0819c1ddd4ab127b389e3920fcfd7d56b13071bab86d</pre><br><hr><br>";
             /**
@@ -149,7 +148,7 @@ class Build
 
         $d = hash_hmac('SHA256', $Request, $c, true);
 
-        if($this->debug >= 1) {
+        if ($this->debug >= 1) {
             echo '<pre>' . print_r(bin2hex($d), true) . "<br>\t===<br>617d7b1b2bd897f4878e1c4f19b9b8ad471530a11a72a8ce928d6e753a5db5f2</pre><br><hr><br>";
             /**
              * 617d7b1b2bd897f4878e1c4f19b9b8ad471530a11a72a8ce928d6e753a5db5f2
@@ -165,7 +164,7 @@ class Build
             'SignedHeaders=content-type;host;x-hrworks-date;x-hrworks-target',
             'Signature=' . $this->signature()
         ];
-        if($this->debug >= 1) {
+        if ($this->debug >= 1) {
             echo '<h3>Authorisation:</h3>';
             echo '<pre>' . print_r($Authorization, true) . "<br>\t===<br>Signature=617d7b1b2bd897f4878e1c4f19b9b8ad471530a11a72a8ce928d6e753a5db5f2</pre><br><hr><br>";
             /**

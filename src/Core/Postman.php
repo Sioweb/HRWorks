@@ -4,19 +4,17 @@ declare(strict_types=1);
 
 namespace Sioweb\Hrworks\Core;
 
-use Symfony\Component\Dotenv\Dotenv;
-
 class Postman extends Build
 {
-    public function load(String $Target, Array $Payload = null)
+    public function load(String $Target, array $Payload = null)
     {
         $this->target = $Target;
-        if($Payload !== null) {
+        if ($Payload !== null) {
             $this->payload = json_encode($Payload);
         }
 
-        if($this->debug >= 2) {
-            $this->payload = '{"organizationUnitNumber":"3"}'; 
+        if ($this->debug >= 2) {
+            $this->payload = '{"organizationUnitNumber":"3"}';
             $this->target = 'GetPresentPersonsOfOrganizationUnit';
         }
 
@@ -94,6 +92,6 @@ class Postman extends Build
                 ]
             ],
             "protocolProfileBehavior" => []
-        ], JSON_PRETTY_PRINT|JSON_UNESCAPED_SLASHES));
+        ], JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES));
     }
 }
