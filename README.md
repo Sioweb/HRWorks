@@ -8,7 +8,7 @@ This client can be used to connect with HRWorks API https://www.hrworks.de/produ
 
 ## Credentials
 
-First create, or update, `.env`-File:
+First create, or update, `.env`-File in root directory:
 
 ```
 HRWORKS_ACCESS_KEY="your_access_key"
@@ -19,14 +19,14 @@ HRWORKS_SECRET_KEY="your_secret_key"
 
 Make sure your admin gave you the correct permissions for the actions you want to use.
 
-After installation yout can create a PHP-File with following content. Please be sure, that you use the correct path to `vendor/autoload.php`.
+After installation yout can create a PHP-File in `/web` directory. Its recommendet to use a subdirectory, so users cannot access sensitive directories like `/vendor`, or `/var/logs` if you use it.
 
 ```php
 <?php
-// index.php
+// /web/index.php
 use Sioweb\Hrworks\Core\Client;
 
-include 'vendor/autoload.php';
+include '../vendor/autoload.php';
 
 $Client = new Client();
 $Organisations = $Client->load('GetAllOrganizationUnits');
@@ -39,7 +39,9 @@ foreach ($Organisations['organizationUnits'] as $Organisation) {
 }
 ```
 
-## Load
+## Client
+
+### Load
 
 Load requires minimum a target. For some actions like `GetPresentPersonsOfOrganizationUnit` you need to add payload as Array: 
 
@@ -50,6 +52,10 @@ $Client->load('GetPresentPersonsOfOrganizationUnit', [
     'organizationUnitNumber' => 1
 ])
 ```
+
+### setRootDir
+
+The client loads `.env` from root dir, which is by default `$_SERVER['DOCUMENT_ROOT'] . '/../`. If you install script in `/` instead of `/web` you neet to run something like `php $Client->setRootDir($_SERVER['DOCUMENT_ROOT']);`.
 
 ## Postman
 

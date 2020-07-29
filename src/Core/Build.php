@@ -16,13 +16,15 @@ class Build
     protected $currentDate = null;
     protected $dayString = null;
 
+    private $rootDir = null;
+
     public function __construct($debug = 0)
     {
         $this->debug = $debug;
 
         header('Access-Control-Allow-Origin: *');
         $dotenv = new Dotenv(true);
-        $dotenv->load(rtrim($_SERVER['DOCUMENT_ROOT'], '/') . '/../.env');
+        $dotenv->load($this->getRootDir() . '.env');
 
         if ($this->debug >= 2) {
             putenv("HRWORKS_ACCESS_KEY=kdVDiLrylwri8+oLffNi");
@@ -44,7 +46,17 @@ class Build
         $this->setupDate();
     }
 
-    protected function request($Header)
+    public function setRootDir(String $rootDir)
+    {
+        $this->rootDir = $rootDir;
+    }
+
+    public function getRootDir()
+    {
+        return rtrim($this->rootDir??$_SERVER['DOCUMENT_ROOT'] . '/..', '/') . '/';
+    }
+
+    protected function request(Array $Header)
     {
         try {
             $curl = curl_init();
