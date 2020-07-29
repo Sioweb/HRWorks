@@ -1,6 +1,6 @@
 # HRWorks API PHP Example Client
 
-This client can be used to connect with HRWorks API.
+This client can be used to connect with HRWorks API https://www.hrworks.de/produkt/api/
 
 ## Installation
 
@@ -47,4 +47,14 @@ Load requires minimum a target. For some actions like `GetPresentPersonsOfOrgani
 $Client->load('GetPresentPersonsOfOrganizationUnit', [
     'organizationUnitNumber' => 1
 ])
+```
+
+## Postman
+
+You can also create a Postman import with this package. You simply have to use Postman::load instead of Client::load. 
+
+**Attention:** Postman will not send correct signature for now. Maybe this will work in some future.
+
+```json
+{"type":"InvalidSignatureError","errorCode":403,"errorMessage":"The signature included in your request does not match the signature we calculated."}
 ```
