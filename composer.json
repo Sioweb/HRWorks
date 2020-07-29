@@ -1,0 +1,19 @@
+{
+    "name": "sioweb/hrworks",
+    "type": "library",
+    "require": {
+        "symfony/dotenv": "^5"
+    },
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Sascha Weidner",
+            "email": "support@sioweb.de"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "Sioweb\\Hrworks\\": "src/"
+        }
+    }
+}
