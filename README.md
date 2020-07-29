@@ -1,12 +1,12 @@
-## HRWorks API PHP Example Client
+# HRWorks API PHP Example Client
 
 This client can be used to connect with HRWorks API https://www.hrworks.de/produkt/api/
 
-### Installation
+## Installation
 
 `composer req sioweb/hrworks`
 
-### Credentials
+## Credentials
 
 First create, or update, `.env`-File in root directory:
 
@@ -15,7 +15,7 @@ HRWORKS_ACCESS_KEY="your_access_key"
 HRWORKS_SECRET_KEY="your_secret_key"
 ```
 
-### Example
+## Example
 
 Make sure your admin gave you the correct permissions for the actions you want to use.
 
@@ -41,9 +41,9 @@ foreach ($Organisations['organizationUnits'] as $Organisation) {
 }
 ```
 
-### Client
+## Client
 
-#### Client::load(String $Target, Array Payload = NULL)
+### Client::load(String $Target, Array Payload = NULL)
 
 Load requires minimum a target. For some actions like `GetPresentPersonsOfOrganizationUnit` you need to add payload as Array: 
 
@@ -55,13 +55,13 @@ $Client->load('GetPresentPersonsOfOrganizationUnit', [
 ])
 ```
 
-#### Client::setRootDir(String $RootPath)
+### Client::setRootDir(String $RootPath)
 
 The client loads `.env` from root dir, which is by default `$_SERVER['DOCUMENT_ROOT'] . '/../`. If you install script in `/` instead of `/web`, you need to run something like `$Client->setRootDir($_SERVER['DOCUMENT_ROOT']);`, befor `$Client->init()`.
 
 `$_SERVER['DOCUMENT_ROOT'] . '/../'` could output for example: `/var/www/html/yourdomain/web/../`
 
-### Postman
+## Postman
 
 You can also create a [Postman](https://www.postman.com) import with this package. You simply have to use Postman::load instead of Client::load. 
 
