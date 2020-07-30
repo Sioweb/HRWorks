@@ -4,7 +4,7 @@ namespace Sioweb\Hrworks\Core;
 
 class Postman extends Build
 {
-    public function load(String $Target, array $Payload = null)
+    public function load($Target, Array $Payload = null)
     {
         $this->target = $Target;
         if ($Payload !== null) {
