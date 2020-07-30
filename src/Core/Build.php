@@ -22,10 +22,26 @@ class Build
         header('Access-Control-Allow-Origin: *');
     }
 
-    public function init()
+    public function init(Array $Options = [])
     {
         $dotenv = new Dotenv(true);
-        $dotenv->load($this->getRootDir() . '.env');
+        if(is_file($this->getRootDir() . '.env')) {
+            $dotenv->load($this->getRootDir() . '.env');
+        }
+
+        if(!empty($Options)) {
+            $Options = array_intersect_key($Options, [
+                'HRWORKS_ACCESS_KEY' => '',
+                'HRWORKS_SECRET_KEY' => '',
+                'HRWORKS_ENVIRONMENT' => '',
+                'HRWORKS_HMAC' => '',
+                'HRWORKS_API_HOST' => ''
+            ]);
+
+            foreach($Options as $key => $value) {
+                putenv(strtoupper($key) . '=' . $value);
+            }
+        }
 
         if ($this->debug >= 2) {
             putenv("HRWORKS_ACCESS_KEY=kdVDiLrylwri8+oLffNi");
@@ -47,7 +63,7 @@ class Build
         $this->setupDate();
     }
 
-    public function setRootDir(String $rootDir)
+    public function setRootDir($rootDir)
     {
         $this->rootDir = $rootDir;
     }
@@ -71,7 +87,7 @@ class Build
             $content = curl_exec($curl);
 
             if ($content === false) {
-                throw new Exception(curl_error($curl), curl_errno($curl));
+                throw new \Exception(curl_error($curl), curl_errno($curl));
             }
 
             if ($this->debug >= 1) {
