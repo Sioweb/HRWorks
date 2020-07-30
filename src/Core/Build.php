@@ -54,7 +54,7 @@ class Build
 
     public function getRootDir()
     {
-        return rtrim($this->rootDir??$_SERVER['DOCUMENT_ROOT'] . '/..', '/') . '/';
+        return rtrim($this->rootDir ? $this->rootDir : $_SERVER['DOCUMENT_ROOT'] . '/..', '/') . '/';
     }
 
     protected function request(Array $Header)
