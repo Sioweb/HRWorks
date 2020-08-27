@@ -2,7 +2,7 @@
     "name": "sioweb/hrworks",
     "type": "library",
     "require": {
-        "symfony/dotenv": "^5"
+        "symfony/dotenv": "*"
     },
     "license": "WTFPL",
     "authors": [
