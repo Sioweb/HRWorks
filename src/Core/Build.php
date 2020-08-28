@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Sioweb\Hrworks\Core;
 
 use Symfony\Component\Dotenv\Dotenv;
@@ -19,7 +21,6 @@ class Build
     public function __construct($debug = 0)
     {
         $this->debug = $debug;
-        header('Access-Control-Allow-Origin: *');
     }
 
     public function init(Array $Options = [])
@@ -63,14 +64,14 @@ class Build
         $this->setupDate();
     }
 
-    public function setRootDir($rootDir)
+    public function setRootDir(String $rootDir)
     {
         $this->rootDir = $rootDir;
     }
 
     public function getRootDir()
     {
-        return rtrim($this->rootDir ? $this->rootDir : $_SERVER['DOCUMENT_ROOT'] . '/..', '/') . '/';
+        return rtrim($this->rootDir ?? $_SERVER['DOCUMENT_ROOT'] . '/..', '/') . '/';
     }
 
     protected function request(Array $Header)
@@ -87,7 +88,7 @@ class Build
             $content = curl_exec($curl);
 
             if ($content === false) {
-                throw new \Exception(curl_error($curl), curl_errno($curl));
+                throw new Exception(curl_error($curl), curl_errno($curl));
             }
 
             if ($this->debug >= 1) {
