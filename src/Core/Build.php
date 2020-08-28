@@ -21,13 +21,28 @@ class Build
     public function __construct($debug = 0)
     {
         $this->debug = $debug;
-        header('Access-Control-Allow-Origin: *');
     }
 
-    public function init()
+    public function init(Array $Options = [])
     {
         $dotenv = new Dotenv(true);
-        $dotenv->load($this->getRootDir() . '.env');
+        if(is_file($this->getRootDir() . '.env')) {
+            $dotenv->load($this->getRootDir() . '.env');
+        }
+
+        if(!empty($Options)) {
+            $Options = array_intersect_key($Options, [
+                'HRWORKS_ACCESS_KEY' => '',
+                'HRWORKS_SECRET_KEY' => '',
+                'HRWORKS_ENVIRONMENT' => '',
+                'HRWORKS_HMAC' => '',
+                'HRWORKS_API_HOST' => ''
+            ]);
+
+            foreach($Options as $key => $value) {
+                putenv(strtoupper($key) . '=' . $value);
+            }
+        }
 
         if ($this->debug >= 2) {
             putenv("HRWORKS_ACCESS_KEY=kdVDiLrylwri8+oLffNi");
@@ -56,7 +71,7 @@ class Build
 
     public function getRootDir()
     {
-        return rtrim($this->rootDir??$_SERVER['DOCUMENT_ROOT'] . '/..', '/') . '/';
+        return rtrim($this->rootDir ?? $_SERVER['DOCUMENT_ROOT'] . '/..', '/') . '/';
     }
 
     protected function request(Array $Header)
